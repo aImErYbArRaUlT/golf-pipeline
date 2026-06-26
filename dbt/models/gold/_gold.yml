@@ -1,0 +1,115 @@
+version: 2
+
+models:
+  - name: dim_player
+    description: >
+      Player dimension, SCD Type 2. One row per profile period with a validity
+      window; a shot attributes to the version current at its session date.
+    columns:
+      - name: player_key
+        description: Surrogate key, md5(player + valid_from). Unique per version.
+        data_tests: [not_null, unique]
+      - name: player
+        data_tests: [not_null]
+      - name: valid_from
+        data_tests: [not_null]
+      - name: is_current
+        data_tests: [not_null]
+
+  - name: dim_club
+    description: >
+      Club dimension, SCD Type 2 + enriched. One row per (player, club)
+      configuration period; stock specs come from the club-spec reference,
+      custom clubs from player-reported specs.
+    columns:
+      - name: club_key
+        description: Surrogate key, md5(player + club_type + valid_from). Unique per version.
+        data_tests: [not_null, unique]
+      - name: player
+        data_tests: [not_null]
+      - name: club_type
+        data_tests: [not_null]
+      - name: is_custom
+        data_tests: [not_null]
+
+  - name: dim_session
+    description: One row per logical session (per source in this build).
+    columns:
+      - name: session_key
+        description: Surrogate key over session_id.
+        data_tests: [not_null, unique]
+      - name: carry_method
+        description: measured (radar/camera) vs estimated (consumer monitor).
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["measured", "estimated"]
+      - name: indoor_outdoor
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["indoor", "outdoor"]
+
+  - name: fct_shots
+    description: >
+      Shot fact table. Grain is one row per shot, with point-in-time player and
+      club keys (valid at session_date) and a club_age derived attribute.
+    columns:
+      - name: shot_id
+        description: Degenerate key - one row per shot.
+        data_tests: [not_null, unique]
+      - name: player_key
+        description: FK to dim_player (the version valid at session_date).
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_player')
+                field: player_key
+      - name: club_key
+        description: FK to dim_club (the version valid at session_date).
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_club')
+                field: club_key
+      - name: session_key
+        description: FK to dim_session.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_session')
+                field: session_key
+      - name: carry_method
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["measured", "estimated"]
+
+  - name: agg_club_gapping
+    description: >
+      Club gapping mart - one row per (source, player, club) with carry/total
+      summaries, the gap to the next-shorter club, and the carry_method so
+      measured and estimated sessions aren't compared blindly.
+    columns:
+      - name: gapping_key
+        description: Surrogate key over (source, player, club). The grain.
+        data_tests: [not_null, unique]
+      - name: shot_count
+        data_tests:
+          - not_null
+          - between:
+              arguments: { min_value: 1, max_value: 100000 }
+      - name: median_carry_yards
+        data_tests:
+          - not_null
+          - between:
+              arguments: { min_value: 0, max_value: 450 }
+      - name: carry_method
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["measured", "estimated"]

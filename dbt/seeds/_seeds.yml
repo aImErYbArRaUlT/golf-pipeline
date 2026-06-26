@@ -1,0 +1,48 @@
+version: 2
+
+# Synthetic reference + profile data. In production these are populated from a
+# short player/club profile form (see docs/data-model.md); here they
+# stand in so the SCD2 + enrichment pattern is fully built and demoable.
+seeds:
+  - name: club_specs
+    description: >
+      Club-spec reference: stock loft/length/shaft per (make, model, year,
+      club_type). Built from public manufacturer specs; the enrichment backbone.
+    columns:
+      - name: club_type
+        data_tests: [not_null]
+
+  - name: player_clubs
+    description: >
+      Player-reported clubs, versioned by effective_from. is_custom flags clubs
+      whose specs differ from stock (bent loft, aftermarket shaft); those use the
+      reported_* specs instead of the reference.
+    columns:
+      - name: player
+        data_tests: [not_null]
+      - name: is_custom
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["true", "false"]
+
+  - name: player_profiles
+    description: >
+      Player attributes (handicap/age/gender), versioned by effective_from so a
+      shot can attribute to the handicap as it was at the session date.
+    columns:
+      - name: player
+        data_tests: [not_null]
+
+  - name: session_manifest
+    description: >
+      Session context per source: date, indoor/outdoor, device, and carry_method
+      (measured vs estimated) so launch conditions aren't compared apples-to-oranges.
+    columns:
+      - name: source
+        data_tests: [not_null, unique]
+      - name: carry_method
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ["measured", "estimated"]

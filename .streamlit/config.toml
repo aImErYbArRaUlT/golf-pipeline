@@ -1,0 +1,7 @@
+# warm yardage-book theme so the app chrome matches the plots
+[theme]
+primaryColor = "#3c863c"
+backgroundColor = "#faf8f2"
+secondaryBackgroundColor = "#efece0"
+textColor = "#33312c"
+font = "sans serif"

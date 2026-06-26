@@ -1,0 +1,53 @@
+player,club_type,make,model,year,is_custom,reported_loft_deg,reported_length_in,reported_shaft,effective_from
+unknown,unknown,unknown,unknown,,false,,,,1900-01-01
+unknown,Driver,unknown,unknown,,false,,,,1900-01-01
+unknown,3 Wood,unknown,unknown,,false,,,,1900-01-01
+unknown,4 Iron,unknown,unknown,,false,,,,1900-01-01
+unknown,5 Iron,unknown,unknown,,false,,,,1900-01-01
+unknown,6 Iron,unknown,unknown,,false,,,,1900-01-01
+unknown,7 Iron,unknown,unknown,,false,,,,1900-01-01
+unknown,8 Iron,unknown,unknown,,false,,,,1900-01-01
+unknown,9 Iron,unknown,unknown,,false,,,,1900-01-01
+unknown,Pitching Wedge,unknown,unknown,,false,,,,1900-01-01
+unknown,Gap Wedge,unknown,unknown,,false,,,,1900-01-01
+Jerry Gamblin,Driver,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Jerry Gamblin,3 Hybrid,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Jerry Gamblin,5 Iron,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Jerry Gamblin,6 Iron,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Jerry Gamblin,7 Iron,TaylorMade,Stealth,2022,true,29.0,37.5,Project X 6.0,2015-01-01
+Jerry Gamblin,8 Iron,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Jerry Gamblin,9 Iron,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Jerry Gamblin,Pitching Wedge,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Jerry Gamblin,Gap Wedge,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Jerry Gamblin,Lob Wedge,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Golfer 1,Driver,Callaway,Rogue ST,2021,false,,,,2015-01-01
+Golfer 1,4 Iron,Callaway,Rogue ST,2021,false,,,,2015-01-01
+Golfer 1,5 Iron,Callaway,Rogue ST,2021,false,,,,2015-01-01
+Golfer 1,7 Iron,Callaway,Rogue ST,2021,false,,,,2015-01-01
+Golfer 1,8 Iron,Callaway,Rogue ST,2021,false,,,,2015-01-01
+Golfer 1,9 Iron,Callaway,Rogue ST,2021,false,,,,2015-01-01
+Golfer 2,Driver,Ping,G425,2020,false,,,,2015-01-01
+Golfer 2,3 Wood,Ping,G425,2020,false,,,,2015-01-01
+Golfer 2,4 Iron,Ping,G425,2020,false,,,,2015-01-01
+Golfer 2,5 Iron,Ping,G425,2020,false,,,,2015-01-01
+Golfer 2,6 Iron,Ping,G425,2020,false,,,,2015-01-01
+Golfer 2,7 Iron,Ping,G425,2020,false,,,,2015-01-01
+Golfer 2,8 Iron,Ping,G425,2020,false,,,,2015-01-01
+Golfer 3,Driver,Ping,G425,2020,false,,,,2015-01-01
+Golfer 3,Driver,TaylorMade,Stealth,2022,false,,,,2024-01-01
+Golfer 3,3 Wood,Titleist,T200,2019,false,,,,2015-01-01
+Golfer 3,4 Iron,Titleist,T200,2019,false,,,,2015-01-01
+Golfer 3,5 Iron,Titleist,T200,2019,false,,,,2015-01-01
+Golfer 3,6 Iron,Titleist,T200,2019,false,,,,2015-01-01
+Golfer 3,7 Iron,Titleist,T200,2019,false,,,,2015-01-01
+Golfer 3,8 Iron,Titleist,T200,2019,false,,,,2015-01-01
+Golfer 3,9 Iron,Titleist,T200,2019,false,,,,2015-01-01
+Golfer 4,Driver,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Golfer 4,7 Iron,TaylorMade,Stealth,2022,false,,,,2015-01-01
+Golfer 5,Driver,Callaway,Rogue ST,2021,false,,,,2015-01-01
+Golfer 5,5 Iron,Callaway,Rogue ST,2021,false,,,,2015-01-01
+Golfer 5,6 Iron,Callaway,Rogue ST,2021,false,,,,2015-01-01
+Golfer 6,Driver,Ping,G425,2020,false,,,,2015-01-01
+Golfer 7,Driver,Titleist,T200,2019,false,,,,2015-01-01
+Golfer 7,3 Wood,Titleist,T200,2019,false,,,,2015-01-01
+Golfer 8,Driver,TaylorMade,Stealth,2022,false,,,,2015-01-01

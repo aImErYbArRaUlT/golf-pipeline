@@ -1,0 +1,21 @@
+# SQL style config for dbt models (BigQuery dialect).
+# Uses the jinja templater for now; switches to the dbt templater in
+# Phase 2 once a dbt project + profile exist.
+[sqlfluff]
+dialect = bigquery
+templater = jinja
+max_line_length = 100
+# RF04: allow keywords as identifiers (BigQuery is lenient).
+# ST06: surrogate-key-first is the idiomatic dbt column order, which this rule
+#       fights - disable it rather than reorder keys below simple columns.
+exclude_rules = RF04, ST06
+
+[sqlfluff:indentation]
+indented_joins = false
+tab_space_size = 4
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = lower
+
+[sqlfluff:rules:capitalisation.identifiers]
+capitalisation_policy = lower

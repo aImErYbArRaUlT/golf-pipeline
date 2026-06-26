@@ -1,0 +1,106 @@
+# ─────────────────────────────────────────────────────────────
+# Secrets - NOTHING personal or credential-bearing is ever tracked
+# ─────────────────────────────────────────────────────────────
+.env
+*.env
+!.env.example
+*-key.json
+*_key.json
+credentials*.json
+service-account*.json
+*.pem
+
+# ─────────────────────────────────────────────────────────────
+# OpenTofu / Terraform - state can contain plaintext secrets
+# ─────────────────────────────────────────────────────────────
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+.terraform/
+# NOTE: .terraform.lock.hcl is intentionally committed (provider version
+# lock, like uv.lock - no secrets). State and tfvars stay ignored.
+crash.log
+crash.*.log
+
+# ─────────────────────────────────────────────────────────────
+# Python / uv
+# ─────────────────────────────────────────────────────────────
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# ─────────────────────────────────────────────────────────────
+# dbt
+# ─────────────────────────────────────────────────────────────
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+**/.user.yml
+
+# ─────────────────────────────────────────────────────────────
+# Airflow (local runtime artifacts)
+# ─────────────────────────────────────────────────────────────
+airflow/logs/
+airflow/plugins/__pycache__/
+airflow.db
+standalone_admin_password.txt
+
+# ─────────────────────────────────────────────────────────────
+# MinIO / local object storage data
+# ─────────────────────────────────────────────────────────────
+minio-data/
+.minio.sys/
+
+# ─────────────────────────────────────────────────────────────
+# Spark
+# ─────────────────────────────────────────────────────────────
+spark-warehouse/
+metastore_db/
+derby.log
+
+# ─────────────────────────────────────────────────────────────
+# Local data - never commit real exports
+# ─────────────────────────────────────────────────────────────
+data/raw/
+data/parquet/
+*.parquet
+# Sample/synthetic seed data is allowed back in explicitly (see Phase 1)
+!data/samples/
+
+# ─────────────────────────────────────────────────────────────
+# Nix / direnv
+# ─────────────────────────────────────────────────────────────
+# nix build output symlink
+result
+result-*
+# nix-direnv cache
+.direnv/
+
+# ─────────────────────────────────────────────────────────────
+# AI schema-mapping drafts (advisory output, reviewed by hand)
+# ─────────────────────────────────────────────────────────────
+*_mapping.draft.json
+
+# ─────────────────────────────────────────────────────────────
+# OS / editor noise
+# ─────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Playwright MCP artifacts
+.playwright-mcp/
+
+# Modeling render artifacts (regenerate with `just calibrate`)
+modeling/artifacts/
+
+# Disposable benchmark-scraper output (review, then commit a cleaned CSV by hand)
+modeling/benchmarks/*.raw.csv

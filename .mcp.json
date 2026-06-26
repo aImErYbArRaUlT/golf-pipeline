@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "bigquery": {
+      "command": "nix",
+      "args": [
+        "develop",
+        "--extra-experimental-features",
+        "nix-command flakes",
+        "--quiet",
+        "--command",
+        "toolbox",
+        "--prebuilt",
+        "bigquery",
+        "--stdio"
+      ],
+      "env": {
+        "BIGQUERY_PROJECT": "${GCP_PROJECT_ID}",
+        "BIGQUERY_LOCATION": "${GCP_LOCATION:-EU}"
+      }
+    }
+  }
+}

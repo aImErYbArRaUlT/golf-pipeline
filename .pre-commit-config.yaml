@@ -1,0 +1,45 @@
+# Pre-commit hooks. Run on every commit (after `just hooks`), and in CI.
+# The secret scanner is the hard guarantee that no credential is ever
+# committed - even by accident. Formatters/linters keep the tree clean.
+repos:
+  # ── Hygiene basics ─────────────────────────────────────────
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files       # blocks accidental data dumps
+        args: ["--maxkb=1024"]
+      - id: check-merge-conflict
+      - id: detect-private-key            # belt-and-braces with gitleaks
+
+  # ── Secret scanner (the hard guarantee) ────────────────────
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.4
+    hooks:
+      - id: gitleaks
+
+  # ── Python lint + format ───────────────────────────────────
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.15.18
+    hooks:
+      - id: ruff-check
+        args: ["--fix"]
+      - id: ruff-format
+
+  - repo: https://github.com/psf/black
+    rev: 25.12.0
+    hooks:
+      - id: black
+
+  # ── SQL lint (dbt models) ──────────────────────────────────
+  - repo: https://github.com/sqlfluff/sqlfluff
+    rev: 4.2.2
+    hooks:
+      - id: sqlfluff-lint
+        files: ^dbt/models/.*\.sql$
+        # stg_manual uses a runtime jinja guard (adapter.get_relation / env_var) for
+        # its optional bronze source - sqlfluff's static jinja templater can't render
+        # those, so it's linted by dbt build + the data tests instead.
+        exclude: ^dbt/models/staging/stg_manual\.sql$

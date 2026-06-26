@@ -1,0 +1,13 @@
+player,handicap_band,age_band,gender,effective_from
+unknown,unknown,unknown,unknown,1900-01-01
+Jerry Gamblin,mid (10-18),40-49,M,2015-01-01
+Golfer 1,mid (10-18),30-39,M,2015-01-01
+Golfer 2,low (5-9),20-29,M,2015-01-01
+Golfer 3,scratch (0-4),30-39,M,2015-01-01
+Golfer 4,mid (10-18),50+,M,2015-01-01
+Golfer 5,high (19+),40-49,F,2015-01-01
+Golfer 6,low (5-9),20-29,F,2015-01-01
+Golfer 7,mid (10-18),50+,M,2015-01-01
+Golfer 8,high (19+),30-39,M,2015-01-01
+Golfer 1,low (5-9),30-39,M,2024-06-01
+Jerry Gamblin,low (5-9),40-49,M,2025-01-01

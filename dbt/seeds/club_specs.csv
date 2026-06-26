@@ -1,0 +1,49 @@
+make,model,year,club_type,stock_loft_deg,standard_length_in,stock_shaft
+TaylorMade,Stealth,2022,Driver,10.5,45.5,Stock Stiff
+TaylorMade,Stealth,2022,3 Wood,15.0,43.0,Stock Stiff
+TaylorMade,Stealth,2022,3 Hybrid,19.0,40.0,Stock Stiff
+TaylorMade,Stealth,2022,4 Iron,21.0,38.5,Stock Stiff
+TaylorMade,Stealth,2022,5 Iron,24.0,38.0,Stock Stiff
+TaylorMade,Stealth,2022,6 Iron,27.0,37.5,Stock Stiff
+TaylorMade,Stealth,2022,7 Iron,31.0,37.0,Stock Stiff
+TaylorMade,Stealth,2022,8 Iron,35.0,36.5,Stock Stiff
+TaylorMade,Stealth,2022,9 Iron,39.0,36.0,Stock Stiff
+TaylorMade,Stealth,2022,Pitching Wedge,44.0,35.5,Stock Stiff
+TaylorMade,Stealth,2022,Gap Wedge,50.0,35.25,Stock Stiff
+TaylorMade,Stealth,2022,Lob Wedge,58.0,35.0,Stock Stiff
+Callaway,Rogue ST,2021,Driver,10.5,45.5,Stock Stiff
+Callaway,Rogue ST,2021,3 Wood,15.0,43.0,Stock Stiff
+Callaway,Rogue ST,2021,3 Hybrid,19.0,40.0,Stock Stiff
+Callaway,Rogue ST,2021,4 Iron,21.0,38.5,Stock Stiff
+Callaway,Rogue ST,2021,5 Iron,24.0,38.0,Stock Stiff
+Callaway,Rogue ST,2021,6 Iron,27.0,37.5,Stock Stiff
+Callaway,Rogue ST,2021,7 Iron,31.0,37.0,Stock Stiff
+Callaway,Rogue ST,2021,8 Iron,35.0,36.5,Stock Stiff
+Callaway,Rogue ST,2021,9 Iron,39.0,36.0,Stock Stiff
+Callaway,Rogue ST,2021,Pitching Wedge,44.0,35.5,Stock Stiff
+Callaway,Rogue ST,2021,Gap Wedge,50.0,35.25,Stock Stiff
+Callaway,Rogue ST,2021,Lob Wedge,58.0,35.0,Stock Stiff
+Ping,G425,2020,Driver,10.5,45.5,Stock Stiff
+Ping,G425,2020,3 Wood,15.0,43.0,Stock Stiff
+Ping,G425,2020,3 Hybrid,19.0,40.0,Stock Stiff
+Ping,G425,2020,4 Iron,21.0,38.5,Stock Stiff
+Ping,G425,2020,5 Iron,24.0,38.0,Stock Stiff
+Ping,G425,2020,6 Iron,27.0,37.5,Stock Stiff
+Ping,G425,2020,7 Iron,31.0,37.0,Stock Stiff
+Ping,G425,2020,8 Iron,35.0,36.5,Stock Stiff
+Ping,G425,2020,9 Iron,39.0,36.0,Stock Stiff
+Ping,G425,2020,Pitching Wedge,44.0,35.5,Stock Stiff
+Ping,G425,2020,Gap Wedge,50.0,35.25,Stock Stiff
+Ping,G425,2020,Lob Wedge,58.0,35.0,Stock Stiff
+Titleist,T200,2019,Driver,10.5,45.5,Stock Stiff
+Titleist,T200,2019,3 Wood,15.0,43.0,Stock Stiff
+Titleist,T200,2019,3 Hybrid,19.0,40.0,Stock Stiff
+Titleist,T200,2019,4 Iron,21.0,38.5,Stock Stiff
+Titleist,T200,2019,5 Iron,24.0,38.0,Stock Stiff
+Titleist,T200,2019,6 Iron,27.0,37.5,Stock Stiff
+Titleist,T200,2019,7 Iron,31.0,37.0,Stock Stiff
+Titleist,T200,2019,8 Iron,35.0,36.5,Stock Stiff
+Titleist,T200,2019,9 Iron,39.0,36.0,Stock Stiff
+Titleist,T200,2019,Pitching Wedge,44.0,35.5,Stock Stiff
+Titleist,T200,2019,Gap Wedge,50.0,35.25,Stock Stiff
+Titleist,T200,2019,Lob Wedge,58.0,35.0,Stock Stiff

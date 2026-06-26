@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: silver_shots
+    description: >
+      Conformed, cleaned shots across all sources - the single trusted shot
+      table. One row per shot, common schema, ready for the gold star schema.
+    columns:
+      - name: shot_id
+        description: Stable surrogate key. Unique and non-null across all sources.
+        data_tests: [not_null, unique]
+      - name: source
+        description: Originating launch monitor (both sources conform into this table).
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ["trackman", "foresight", "caddieset", "flightscope", "manual"]
+      - name: ball_speed_mph
+        description: Ball speed in mph (non-null after cleaning).
+        data_tests:
+          - not_null
+          - between:
+              arguments: { min_value: 0, max_value: 250 }

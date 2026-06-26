@@ -1,0 +1,5 @@
+# stg_manual uses a runtime jinja guard (adapter.get_relation / env_var) for its
+# optional bronze source; sqlfluff's static jinja templater can't render those, so it
+# can't be linted. It's gated by `dbt build` + the data tests instead. (Mirrors the
+# per-hook exclude in .pre-commit-config.yaml, for the CI `sqlfluff lint dbt/models`.)
+dbt/models/staging/stg_manual.sql

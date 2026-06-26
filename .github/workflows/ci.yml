@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel superseded runs on the same ref.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    name: Lint, unit tests, dbt parse
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Sync dependencies
+        run: uv sync --group dev --group dbt --group modeling
+
+      - name: Ruff (lint)
+        run: uv run ruff check .
+
+      - name: Ruff (format check)
+        run: uv run ruff format --check .
+
+      - name: Black (format check)
+        run: uv run black --check .
+
+      - name: sqlfluff (SQL lint)
+        run: uv run sqlfluff lint dbt/models
+
+      - name: Pytest (ingestion unit tests)
+        run: uv run pytest -q
+
+      # Physics/calibration/contract tests. Self-contained - synthetic shots,
+      # no warehouse - so they run on every PR like the ingestion suite.
+      - name: Pytest (modeling unit tests)
+        run: uv run pytest -q modeling/tests
+
+      # Offline integrity check of the dbt graph (ref/source resolution, model
+      # compilation) - no warehouse connection needed.
+      - name: dbt parse (model graph)
+        working-directory: dbt
+        env:
+          DBT_PROFILES_DIR: .
+          GCP_PROJECT_ID: ci-dummy-project
+        run: uv run dbt parse --target dev
+
+  dbt-bigquery:
+    name: dbt build + test (BigQuery)
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    # The full data-contract gate against BigQuery. Off in the sandbox; enable by
+    # setting the repo variable RUN_BIGQUERY_CI=true plus the GCP_SA_KEY secret
+    # (needs billing). The secrets context is not allowed in a job-level if, so the
+    # switch is a repo variable; the key itself is still read from the secret below.
+    if: ${{ github.event_name == 'push' && vars.RUN_BIGQUERY_CI == 'true' }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Sync dependencies
+        run: uv sync --group dev --group dbt
+
+      - name: Write service-account key
+        run: printf '%s' '${{ secrets.GCP_SA_KEY }}' > "${RUNNER_TEMP}/sa.json"
+
+      - name: dbt seed + run + test
+        working-directory: dbt
+        env:
+          DBT_PROFILES_DIR: .
+          GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ runner.temp }}/sa.json
+        run: |
+          uv run dbt seed --target dev
+          uv run dbt run --target dev
+          uv run dbt test --target dev

@@ -1,0 +1,31 @@
+# dbt connection profile. Safe to commit: it uses OAuth (your gcloud ADC) -
+# no keys - and reads the project/location from the environment. One output
+# per environment; `--target <env>` (via `just dbt-run <env>`) selects it, and
+# models derive their datasets from target.name.
+golf_pipeline:
+  target: dev
+  outputs:
+    dev:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: dev_silver
+      location: "{{ env_var('GCP_LOCATION', 'EU') }}"
+      threads: 4
+      priority: interactive
+    uat:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: uat_silver
+      location: "{{ env_var('GCP_LOCATION', 'EU') }}"
+      threads: 4
+      priority: interactive
+    prod:
+      type: bigquery
+      method: oauth
+      project: "{{ env_var('GCP_PROJECT_ID') }}"
+      dataset: prod_silver
+      location: "{{ env_var('GCP_LOCATION', 'EU') }}"
+      threads: 4
+      priority: interactive

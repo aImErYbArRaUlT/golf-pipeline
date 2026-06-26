@@ -1,0 +1,5 @@
+# Optional. env / project_id / enable_service_account are normally supplied
+# by direnv (.envrc) from .env, so a real terraform.tfvars is not required.
+# Use this only to override defaults for this environment, e.g.:
+# bq_location = "US"
+# region      = "us-central1"

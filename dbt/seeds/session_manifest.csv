@@ -1,0 +1,6 @@
+source,session_id,session_date,indoor_outdoor,device,carry_method,ball_type
+trackman,trackman-001,2024-07-15,outdoor,TrackMan,measured,premium
+foresight,foresight-001,2026-05-04,outdoor,Garmin R10,estimated,range
+caddieset,caddieset-001,2025-03-10,indoor,CaddieSet Camera,estimated,premium
+flightscope,flightscope-001,2019-01-01,outdoor,FlightScope Mevo,estimated,premium
+manual,manual-001,2026-05-10,outdoor,Personal launch monitor,measured,premium

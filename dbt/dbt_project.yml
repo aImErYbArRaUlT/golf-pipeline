@@ -1,0 +1,46 @@
+name: "golf_pipeline"
+version: "1.0.0"
+profile: "golf_pipeline"
+
+model-paths: ["models"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+
+# Models build into env-scoped datasets (dev_silver / dev_gold, etc.). The
+# env comes from the dbt target (see profiles.yml and the generate_schema_name
+# override in macros/). Staging + silver land in <env>_silver; gold in <env>_gold.
+# Reference/metadata seeds (synthetic for now; fed by a profile form later).
+# Land alongside silver as the dimension source data. Column types are pinned
+# so BigQuery autodetect can't misinfer sparse columns (e.g. a mostly-empty
+# float as INT64); the models cast from these predictable types.
+seeds:
+  golf_pipeline:
+    +schema: "{{ target.name }}_silver"
+    club_specs:
+      +column_types:
+        year: string
+        stock_loft_deg: float64
+        standard_length_in: float64
+    player_clubs:
+      +column_types:
+        year: string
+        is_custom: string
+        reported_loft_deg: float64
+        reported_length_in: float64
+        effective_from: string
+    player_profiles:
+      +column_types:
+        effective_from: string
+    session_manifest:
+      +column_types:
+        session_date: string
+
+models:
+  golf_pipeline:
+    staging:
+      +materialized: view
+    silver:
+      +materialized: table
+    gold:
+      +materialized: table
+      +schema: "{{ target.name }}_gold"

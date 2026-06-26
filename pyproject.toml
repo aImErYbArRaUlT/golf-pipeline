@@ -1,0 +1,80 @@
+[project]
+name = "golf-pipeline"
+version = "0.1.0"
+description = "Multi-source golf launch-monitor data pipeline (medallion architecture)"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+
+# Runtime dependencies for ingestion (Phase 1). Small-data path uses
+# pandas + pyarrow; boto3 talks to MinIO over the S3 API; the BigQuery
+# client loads Parquet into bronze. python-dotenv loads local .env.
+dependencies = [
+    "pandas>=2.2",
+    "pyarrow>=16.0",
+    "boto3>=1.34",
+    "google-cloud-bigquery>=3.25",
+    "python-dotenv>=1.0",
+    "requests>=2.32",
+]
+
+# Dependency groups (PEP 735). Kept separate so the heavy, phase-specific
+# tools (dbt, Spark) aren't pulled in unless needed. Install with e.g.
+#   uv sync --group dev --group dbt
+[dependency-groups]
+dev = [
+    "ruff>=0.6",
+    "black>=24.0",
+    "pytest>=8.0",
+    "sqlfluff>=3.1",
+    "pre-commit>=3.8",
+    "detect-secrets>=1.5",
+]
+dbt = [
+    "dbt-bigquery>=1.8",
+]
+spark = [
+    "pyspark>=3.5",
+]
+ai = [
+    "anthropic>=0.111.0",
+]
+modeling = [
+    "matplotlib>=3.11.0",
+    "numpy>=2.4.6",
+    "scipy>=1.18.0",
+    "shapely>=2.0",
+]
+# Disposable benchmark-table scraper (modeling/benchmarks/collect.py); not used
+# by the pipeline. pandas comes from the runtime deps; lxml backs read_html.
+collect = [
+    "lxml>=5.3.0",
+]
+# Interactive Stage-F app (modeling/app.py); run with the modeling group too.
+app = [
+    "streamlit>=1.40",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# The package lives under ingestion/ (kept separate from infra/dbt/etc.),
+# so point the build backend at it explicitly. uv installs it editable, so
+# `python -m golf_ingest.ingest` works from the repo root.
+[tool.hatch.build.targets.wheel]
+packages = ["ingestion/golf_ingest", "modeling"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+# E/F = pyflakes+pycodestyle, I = isort, UP = pyupgrade, B = bugbear.
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.black]
+line-length = 100
+target-version = ["py312"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
